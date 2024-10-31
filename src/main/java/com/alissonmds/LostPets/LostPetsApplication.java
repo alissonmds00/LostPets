@@ -1,0 +1,13 @@
+package com.alissonmds.LostPets;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class LostPetsApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(LostPetsApplication.class, args);
+	}
+
+}
