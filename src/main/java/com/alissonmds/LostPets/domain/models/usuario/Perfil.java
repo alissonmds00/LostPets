@@ -20,7 +20,7 @@ public class Perfil {
     private String nome;
     private String telefone;
     private String instagram;
-    @OneToOne(mappedBy = "perfil")
+    @OneToOne
     private Usuario usuario;
     @OneToMany(mappedBy = "perfil")
     private List<Pet> pets;

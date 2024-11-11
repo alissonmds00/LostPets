@@ -17,6 +17,6 @@ public class Usuario {
     private String login;
     private String senha;
     private boolean ativo;
-    @OneToOne
+    @OneToOne(mappedBy = "usuario")
     private Perfil perfil;
 }
