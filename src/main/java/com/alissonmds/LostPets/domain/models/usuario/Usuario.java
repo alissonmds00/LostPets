@@ -1,5 +1,6 @@
 package com.alissonmds.LostPets.domain.models.usuario;
 
+import com.alissonmds.LostPets.domain.dto.usuario.DadosCadastramentoUsuario;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,4 +20,10 @@ public class Usuario {
     private boolean ativo;
     @OneToOne(mappedBy = "usuario")
     private Perfil perfil;
+
+    public Usuario(DadosCadastramentoUsuario dados) {
+        this.login = dados.login();
+        this.senha = dados.senha();
+        this.ativo = true;
+    }
 }

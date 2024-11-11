@@ -1,6 +1,9 @@
-package com.alissonmds.LostPets.domain.models.pet;
+package com.alissonmds.LostPets.domain.dto.pet;
 
 import com.alissonmds.LostPets.domain.models.endereco.Endereco;
+import com.alissonmds.LostPets.domain.models.pet.Animal;
+import com.alissonmds.LostPets.domain.models.pet.Pet;
+import com.alissonmds.LostPets.domain.models.pet.Situacao;
 
 import java.time.LocalDateTime;
 

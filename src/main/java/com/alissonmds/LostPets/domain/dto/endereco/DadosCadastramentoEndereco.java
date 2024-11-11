@@ -1,4 +1,4 @@
-package com.alissonmds.LostPets.domain.models.endereco;
+package com.alissonmds.LostPets.domain.dto.endereco;
 
 import jakarta.validation.constraints.NotBlank;
 

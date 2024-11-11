@@ -1,7 +1,9 @@
-package com.alissonmds.LostPets.domain.models.pet;
+package com.alissonmds.LostPets.domain.dto.pet;
 
 
-import com.alissonmds.LostPets.domain.models.endereco.DadosCadastramentoEndereco;
+import com.alissonmds.LostPets.domain.dto.endereco.DadosCadastramentoEndereco;
+import com.alissonmds.LostPets.domain.models.pet.Animal;
+import com.alissonmds.LostPets.domain.models.pet.Situacao;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

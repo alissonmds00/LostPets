@@ -1,5 +1,6 @@
 package com.alissonmds.LostPets.domain.models.endereco;
 
+import com.alissonmds.LostPets.domain.dto.endereco.DadosCadastramentoEndereco;
 import jakarta.persistence.Embeddable;
 import lombok.*;
 

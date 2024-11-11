@@ -1,4 +1,4 @@
-package com.alissonmds.LostPets.domain.models.usuario;
+package com.alissonmds.LostPets.domain.dto.usuario;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
