@@ -22,6 +22,6 @@ public class Perfil {
     private String instagram;
     @OneToOne
     private Usuario usuario;
-    @OneToMany(mappedBy = "perfil")
+    @OneToMany(mappedBy = "perfil", cascade = CascadeType.REMOVE)
     private List<Pet> pets;
 }
