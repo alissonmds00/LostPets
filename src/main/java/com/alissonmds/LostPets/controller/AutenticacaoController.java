@@ -1,10 +1,8 @@
 package com.alissonmds.LostPets.controller;
-import com.alissonmds.LostPets.domain.dto.DadosAutenticacao;
+import com.alissonmds.LostPets.domain.dto.usuario.DadosAutenticacao;
 import com.alissonmds.LostPets.domain.models.usuario.Usuario;
-import com.alissonmds.LostPets.infra.exceptions.ValidacaoException;
 import com.alissonmds.LostPets.infra.security.DadosTokenJWT;
 import com.alissonmds.LostPets.infra.security.TokenService;
-import com.alissonmds.LostPets.repository.UsuarioRepository;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;

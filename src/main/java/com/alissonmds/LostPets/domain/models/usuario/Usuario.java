@@ -1,6 +1,7 @@
 package com.alissonmds.LostPets.domain.models.usuario;
 
 import com.alissonmds.LostPets.domain.dto.usuario.DadosCadastramentoUsuario;
+import com.alissonmds.LostPets.domain.models.perfil.Perfil;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

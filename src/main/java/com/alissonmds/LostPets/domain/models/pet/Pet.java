@@ -2,7 +2,7 @@ package com.alissonmds.LostPets.domain.models.pet;
 
 import com.alissonmds.LostPets.domain.dto.pet.DadosCadastramentoPet;
 import com.alissonmds.LostPets.domain.models.endereco.Endereco;
-import com.alissonmds.LostPets.domain.models.usuario.Perfil;
+import com.alissonmds.LostPets.domain.models.perfil.Perfil;
 import jakarta.persistence.*;
 import lombok.*;
 
