@@ -30,4 +30,10 @@ public class PerfilController {
         }
         return ResponseEntity.ok().body(new DadosDetalhamentoPerfil(novoPerfil));
     }
+
+    @GetMapping
+    @RequestMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoPerfil> visualizarPerfil(@PathVariable Long id) {
+        return ResponseEntity.ok(perfilService.buscarPerfil(id));
+    }
 }

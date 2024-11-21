@@ -1,6 +1,7 @@
 package com.alissonmds.LostPets.domain.services;
 
 import com.alissonmds.LostPets.domain.dto.perfil.DadosCadastramentoPerfil;
+import com.alissonmds.LostPets.domain.dto.perfil.DadosDetalhamentoPerfil;
 import com.alissonmds.LostPets.domain.models.perfil.Perfil;
 import com.alissonmds.LostPets.infra.exceptions.ValidacaoException;
 import com.alissonmds.LostPets.infra.security.TokenService;
@@ -30,5 +31,13 @@ public class PerfilService {
         usuario.setPerfil(perfil);
         perfilRepository.save(perfil);
         return perfil;
+    }
+
+    public DadosDetalhamentoPerfil buscarPerfil(Long id) {
+        var perfil = perfilRepository.findById(id);
+        if (perfil.isEmpty()) {
+            throw new ValidacaoException("Perfil não encontrado");
+        }
+        return new DadosDetalhamentoPerfil(perfil.get());
     }
 }
