@@ -4,7 +4,6 @@ import com.alissonmds.LostPets.domain.models.endereco.Estado;
 import com.alissonmds.LostPets.domain.models.endereco.Municipio;
 import com.alissonmds.LostPets.repository.EstadoRepository;
 import com.alissonmds.LostPets.repository.MunicipioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +17,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/enderecos")
 public class EnderecoController {
 
-    @Autowired
-    private EstadoRepository estadoRepository;
+    private final EstadoRepository estadoRepository;
+    private final MunicipioRepository municipioRepository;
 
-    @Autowired
-    private MunicipioRepository municipioRepository;
+    public EnderecoController(EstadoRepository estadoRepository, MunicipioRepository municipioRepository) {
+        this.estadoRepository = estadoRepository;
+        this.municipioRepository = municipioRepository;
+    }
 
     @GetMapping("/estados")
     public ResponseEntity<List<String>> listarEstados() {

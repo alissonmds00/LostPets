@@ -15,20 +15,25 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/perfil")
 public class PerfilController {
 
+    private final PerfilService perfilService;
+    private final TokenService tokenService;
+
     @Autowired
-    private PerfilService perfilService;
-    @Autowired
-    private TokenService tokenService;
+    public PerfilController(PerfilService perfilService, TokenService tokenService) {
+        this.perfilService = perfilService;
+        this.tokenService = tokenService;
+    }
 
     @PostMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoPerfil> criarUsuario(@Valid @RequestBody DadosCadastramentoPerfil dados, @RequestHeader("Authorization") String bearerToken) {
-        var token = tokenService.extrairToken(bearerToken);
-        var novoPerfil = perfilService.criarPerfil(dados, token);
-        if (novoPerfil == null) {
+        try {
+            var token = tokenService.extrairToken(bearerToken);
+            var novoPerfil = perfilService.criarPerfil(dados, token);
+            return ResponseEntity.ok().body(new DadosDetalhamentoPerfil(novoPerfil));
+        } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok().body(new DadosDetalhamentoPerfil(novoPerfil));
     }
 
     @GetMapping

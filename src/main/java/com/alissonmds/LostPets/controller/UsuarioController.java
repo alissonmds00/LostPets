@@ -17,11 +17,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("/registro")
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioService;
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioController(UsuarioRepository usuarioRepository, UsuarioService usuarioService) {
+        this.usuarioRepository = usuarioRepository;
+        this.usuarioService = usuarioService;
+    }
 
     @PostMapping
     @Transactional

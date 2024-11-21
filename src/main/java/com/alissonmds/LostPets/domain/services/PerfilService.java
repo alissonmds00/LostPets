@@ -13,17 +13,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class PerfilService {
 
-    @Autowired
-    private TokenService tokenService;
+    private final TokenService tokenService;
+    private final UsuarioRepository usuarioRepository;
+    private final PerfilRepository perfilRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
-    @Autowired
-    private PerfilRepository perfilRepository;
+    public PerfilService(TokenService tokenService, UsuarioRepository usuarioRepository, PerfilRepository perfilRepository) {
+        this.tokenService = tokenService;
+        this.usuarioRepository = usuarioRepository;
+        this.perfilRepository = perfilRepository;
+    }
 
     public Perfil criarPerfil(DadosCadastramentoPerfil dados, String token) {
         var login = tokenService.getSubject(token);
-        var usuario = usuarioRepository.findByLogin(login).get();
+        var usuario = usuarioRepository.findByLogin(login)
+                .orElseThrow(() -> new ValidacaoException("Usuário não encontrado."));
         if (usuario.getPerfil() != null) {
             throw new ValidacaoException("Este usuário já possui um perfil.");
         }
