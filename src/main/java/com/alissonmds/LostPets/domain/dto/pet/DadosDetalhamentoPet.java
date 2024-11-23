@@ -1,9 +1,7 @@
 package com.alissonmds.LostPets.domain.dto.pet;
 
 import com.alissonmds.LostPets.domain.models.endereco.Endereco;
-import com.alissonmds.LostPets.domain.models.pet.Animal;
 import com.alissonmds.LostPets.domain.models.pet.Pet;
-import com.alissonmds.LostPets.domain.models.pet.Situacao;
 
 import java.time.LocalDateTime;
 
@@ -12,8 +10,8 @@ public record DadosDetalhamentoPet(String nomeAutor,
                                    Endereco endereco,
                                    String titulo,
                                    LocalDateTime dataPostagem,
-                                   Situacao situacao,
-                                   Animal animal,
+                                   String situacao,
+                                   String animal,
                                    String urlFoto) {
 
     public DadosDetalhamentoPet(Pet pet) {

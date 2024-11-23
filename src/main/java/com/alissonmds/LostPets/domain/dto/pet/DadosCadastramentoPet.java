@@ -14,6 +14,6 @@ public record DadosCadastramentoPet(
         @NotBlank String titulo,
         @NotNull Situacao situacao,
         @NotNull Animal animal,
-        @URL @NotBlank String foto
+        @URL @NotNull String foto
         ) {
 }

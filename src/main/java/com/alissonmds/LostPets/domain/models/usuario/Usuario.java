@@ -32,7 +32,7 @@ public class Usuario implements UserDetails {
         this.login = dados.login();
         this.senha = senha;
         this.ativo = true;
-        //this.perfil = null;
+        this.perfil = null;
     }
 
     @Override

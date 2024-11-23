@@ -26,16 +26,19 @@ public class Pet {
     private Endereco local;
     private String titulo;
     private LocalDateTime data;
-    private Situacao situacao;
-    private Animal animal;
+    private String situacao;
+    private String animal;
     private String foto;
 
-    public Pet(DadosCadastramentoPet dados) {
+    public Pet(DadosCadastramentoPet dados, Perfil autor) {
         this.ativo = true;
         this.local = new Endereco(dados.local());
         this.titulo = dados.titulo();
         this.data = LocalDateTime.now();
-        this.situacao = dados.situacao();
+        this.situacao = dados.situacao().situacaoToString();
+        this.animal = dados.animal().animalToString();
+        this.perfil = autor;
+        this.foto = dados.foto();
     }
 
     public void desativar() {
