@@ -5,7 +5,6 @@ import com.alissonmds.LostPets.domain.dto.perfil.DadosCadastramentoPerfil;
 import com.alissonmds.LostPets.domain.dto.perfil.DadosDetalhamentoPerfil;
 import com.alissonmds.LostPets.domain.services.ExtracaoDadosTokenService;
 import com.alissonmds.LostPets.domain.services.PerfilService;
-import com.alissonmds.LostPets.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,7 @@ public class PerfilController {
     private final ExtracaoDadosTokenService dadosTokenService;
 
     @Autowired
-    public PerfilController(PerfilService perfilService, TokenService tokenService, ExtracaoDadosTokenService dadosTokenService) {
+    public PerfilController(PerfilService perfilService, ExtracaoDadosTokenService dadosTokenService) {
         this.perfilService = perfilService;
         this.dadosTokenService = dadosTokenService;
     }

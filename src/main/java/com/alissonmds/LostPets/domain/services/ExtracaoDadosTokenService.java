@@ -14,14 +14,12 @@ public class ExtracaoDadosTokenService {
 
     private final TokenService tokenService;
     private final UsuarioRepository usuarioRepository;
-    private final PerfilRepository perfilRepository;
 
 
     @Autowired
-    public ExtracaoDadosTokenService(TokenService tokenService, UsuarioRepository usuarioRepository, PerfilRepository perfilRepository) {
+    public ExtracaoDadosTokenService(TokenService tokenService, UsuarioRepository usuarioRepository) {
         this.tokenService = tokenService;
         this.usuarioRepository = usuarioRepository;
-        this.perfilRepository = perfilRepository;
     }
 
     public String extrairToken(String bearerToken) {

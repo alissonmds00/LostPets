@@ -1,8 +1,6 @@
 package com.alissonmds.LostPets.infra.security;
 
-import com.alissonmds.LostPets.domain.models.perfil.Perfil;
 import com.alissonmds.LostPets.domain.models.usuario.Usuario;
-import com.alissonmds.LostPets.repository.UsuarioRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -19,12 +17,10 @@ public class TokenService {
 
     private final String ISSUER = "LostPets api";
     private final String SECRET;
-    private final UsuarioRepository usuarioRepository;
 
     @Autowired
-    public TokenService(Dotenv dotenv, UsuarioRepository usuarioRepository) {
+    public TokenService(Dotenv dotenv) {
         this.SECRET = dotenv.get("JWT_SECRET");
-        this.usuarioRepository = usuarioRepository;
     }
 
     public String gerarToken(Usuario usuario) {
