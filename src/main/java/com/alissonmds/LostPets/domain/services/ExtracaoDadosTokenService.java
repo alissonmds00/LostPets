@@ -4,7 +4,6 @@ import com.alissonmds.LostPets.domain.models.perfil.Perfil;
 import com.alissonmds.LostPets.domain.models.usuario.Usuario;
 import com.alissonmds.LostPets.infra.exceptions.ValidacaoException;
 import com.alissonmds.LostPets.infra.security.TokenService;
-import com.alissonmds.LostPets.repository.PerfilRepository;
 import com.alissonmds.LostPets.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
