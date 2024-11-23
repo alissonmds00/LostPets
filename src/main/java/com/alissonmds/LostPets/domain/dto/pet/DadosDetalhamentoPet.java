@@ -12,8 +12,8 @@ public record DadosDetalhamentoPet(String nomeAutor,
                                    Endereco endereco,
                                    String titulo,
                                    LocalDateTime dataPostagem,
-                                   Situacao situacao,
-                                   Animal animal,
+                                   String situacao,
+                                   String animal,
                                    String urlFoto) {
 
     public DadosDetalhamentoPet(Pet pet) {

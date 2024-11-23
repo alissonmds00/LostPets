@@ -2,7 +2,11 @@ package com.alissonmds.LostPets.domain.models.pet;
 
 public enum Situacao {
     ENCONTRADO,
-    PERDIDO
+    PERDIDO;
+
+    public String situacaoToString() {
+        return this.name();
+    }
 
 
 }

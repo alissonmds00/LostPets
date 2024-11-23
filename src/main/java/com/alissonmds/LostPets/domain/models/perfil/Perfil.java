@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Table(name = "perfil")
+@Table(name = "perfis")
 @Entity(name = "Perfil")
 public class Perfil {
     @Id
