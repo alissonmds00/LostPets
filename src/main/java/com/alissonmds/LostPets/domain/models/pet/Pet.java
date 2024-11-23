@@ -30,12 +30,13 @@ public class Pet {
     private Animal animal;
     private String foto;
 
-    public Pet(DadosCadastramentoPet dados) {
+    public Pet(DadosCadastramentoPet dados, Perfil autor) {
         this.ativo = true;
         this.local = new Endereco(dados.local());
         this.titulo = dados.titulo();
         this.data = LocalDateTime.now();
         this.situacao = dados.situacao();
+        this.perfil = autor;
     }
 
     public void desativar() {
