@@ -1,6 +1,7 @@
 package com.alissonmds.LostPets.controller;
 
 
+import com.alissonmds.LostPets.domain.dto.endereco.DadosAtualizacaoEndereco;
 import com.alissonmds.LostPets.domain.dto.perfil.DadosCadastramentoPerfil;
 import com.alissonmds.LostPets.domain.dto.perfil.DadosDetalhamentoPerfil;
 import com.alissonmds.LostPets.domain.services.ExtracaoDadosTokenService;
@@ -27,17 +28,20 @@ public class PerfilController {
     @PostMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoPerfil> criarUsuario(@Valid @RequestBody DadosCadastramentoPerfil dados, @RequestHeader("Authorization") String bearerToken) {
-        try {
-            var token = dadosTokenService.extrairToken(bearerToken);
-            var novoPerfil = perfilService.criarPerfil(dados, token);
-            return ResponseEntity.ok().body(new DadosDetalhamentoPerfil(novoPerfil));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        var token = dadosTokenService.extrairToken(bearerToken);
+        var novoPerfil = perfilService.criarPerfil(dados, token);
+        return ResponseEntity.ok().body(new DadosDetalhamentoPerfil(novoPerfil));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoPerfil> visualizarPerfil(@PathVariable Long id) {
         return ResponseEntity.ok(perfilService.buscarPerfil(id));
+    }
+
+    @PostMapping("/endereco")
+    @Transactional
+    public ResponseEntity<DadosDetalhamentoPerfil> atualizarEndereco(@RequestBody DadosAtualizacaoEndereco dados, @RequestHeader("Authorization") String bearerToken) {
+        var perfil = perfilService.atualizarEndereco(dados, bearerToken);
+        return ResponseEntity.ok(new DadosDetalhamentoPerfil(perfil));
     }
 }

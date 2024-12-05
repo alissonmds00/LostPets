@@ -17,8 +17,8 @@ public class Endereco {
     private String referencia;
 
     public Endereco(DadosCadastramentoEndereco local) {
-        this.estado = local.estado();
-        this.cidade = local.cidade();
+        this.estado = local.estado().toUpperCase();
+        this.cidade = local.cidade().toUpperCase();
         this.bairro = local.bairro();
         this.rua = local.rua();
         this.referencia = local.referencia();

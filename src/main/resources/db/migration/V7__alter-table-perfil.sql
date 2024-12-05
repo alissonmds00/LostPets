@@ -1,0 +1,3 @@
+ALTER TABLE perfis
+ADD estado VARCHAR(255),
+ADD cidade VARCHAR(255);

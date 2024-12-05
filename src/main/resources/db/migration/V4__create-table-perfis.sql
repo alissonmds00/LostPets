@@ -1,5 +1,5 @@
 create table perfis(
-    id SERIAL NOT NULL,
+   id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
     nome varchar(255) NOT NULL,
     telefone varchar(50) NOT NULL,
     instagram varchar(255),

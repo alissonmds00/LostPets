@@ -28,13 +28,9 @@ public class UsuarioController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<DadosCadastramentoUsuario> cadastrarUsuario(@RequestBody @Valid DadosCadastramentoUsuario dados, UriComponentsBuilder uriBuilder) {
-        try {
-            var usuario = usuarioService.criarUsuario(dados);
-            usuarioRepository.save(usuario);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public ResponseEntity<DadosCadastramentoUsuario> cadastrarUsuario(@RequestBody @Valid DadosCadastramentoUsuario dados, UriComponentsBuilder uriBuilder) throws Exception {
+        var usuario = usuarioService.criarUsuario(dados);
+        usuarioRepository.save(usuario);
         return ResponseEntity.ok().build();
     }
 }

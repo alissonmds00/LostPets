@@ -1,9 +1,12 @@
 package com.alissonmds.LostPets.domain.services;
 
+import com.alissonmds.LostPets.domain.dto.endereco.DadosAtualizacaoEndereco;
 import com.alissonmds.LostPets.domain.dto.perfil.DadosCadastramentoPerfil;
 import com.alissonmds.LostPets.domain.dto.perfil.DadosDetalhamentoPerfil;
+import com.alissonmds.LostPets.domain.models.endereco.Estados;
 import com.alissonmds.LostPets.domain.models.perfil.Perfil;
 import com.alissonmds.LostPets.infra.exceptions.ValidacaoException;
+import com.alissonmds.LostPets.repository.EstadoRepository;
 import com.alissonmds.LostPets.repository.PerfilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +42,15 @@ public class PerfilService {
     public DadosDetalhamentoPerfil buscarPerfil(Long id) {
         return new DadosDetalhamentoPerfil(perfilRepository.findById(id)
                 .orElseThrow(() -> new ValidacaoException("Perfil não encontrado")));
+    }
+
+    public Perfil atualizarEndereco(DadosAtualizacaoEndereco dados, String bearerToken) {
+            var perfil = dadosTokenService.identificarPerfil(bearerToken);
+            try {
+                perfil.atualizarEndereco(dados);
+            } catch (Exception ex) {
+                throw new ValidacaoException("Ocorreu um erro ao tentar atualizar o endereço deste perfil");
+            }
+            return perfil;
     }
 }

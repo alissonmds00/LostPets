@@ -1,5 +1,5 @@
 create table pet(
-    id SERIAL NOT NULL,
+    id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
     animal varchar(50) NOT NULL,
     ativo BOOLEAN NOT NULL,
     data timestamp NOT NULL,

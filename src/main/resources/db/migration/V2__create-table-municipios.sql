@@ -1,5 +1,5 @@
 create table Municipio(
-                       id SERIAL NOT NULL,
+                      id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
                        codigo INTEGER NOT NULL,
                        nome VARCHAR(50) NOT NULL,
                        uf CHAR(2) NOT NULL,

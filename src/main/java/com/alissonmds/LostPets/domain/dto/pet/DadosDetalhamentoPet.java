@@ -5,7 +5,8 @@ import com.alissonmds.LostPets.domain.models.pet.Pet;
 
 import java.time.LocalDateTime;
 
-public record DadosDetalhamentoPet(String nomeAutor,
+public record DadosDetalhamentoPet(Long id,
+                                   String nomeAutor,
                                    String contatoAutor,
                                    Endereco endereco,
                                    String titulo,
@@ -15,6 +16,6 @@ public record DadosDetalhamentoPet(String nomeAutor,
                                    String urlFoto) {
 
     public DadosDetalhamentoPet(Pet pet) {
-        this(pet.getPerfil().getNome(), pet.getPerfil().getTelefone(), pet.getLocal(), pet.getTitulo(), pet.getData(), pet.getSituacao(), pet.getAnimal(), pet.getFoto());
+        this(pet.getId(), pet.getPerfil().getNome(), pet.getPerfil().getTelefone(), pet.getLocal(), pet.getTitulo(), pet.getData(), pet.getSituacao(), pet.getAnimal(), pet.getFoto());
     }
 }
