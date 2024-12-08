@@ -45,7 +45,7 @@ public class TratamentoDeErros {
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<String> tratarErroAcessoNegado() {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Acesso negado");
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Você não tem permissão para isso.");
     }
 
     @ExceptionHandler(Exception.class)

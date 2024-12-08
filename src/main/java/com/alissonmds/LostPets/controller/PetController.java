@@ -14,6 +14,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.AccessDeniedException;
+
 @RestController
 @RequestMapping("/pets")
 public class PetController {
@@ -35,12 +37,31 @@ public class PetController {
     }
 
     @GetMapping("/{situacao}/{estado}/{cidade}")
-    public ResponseEntity<Page<DadosDetalhamentoPet>> obterPostPetsPorSituacao(
+    public ResponseEntity<Page<DadosDetalhamentoPet>> obterPostPetsPorSituacaoEstadoCidade(
             @PathVariable Situacao situacao,
             @PathVariable Estados estado,
             @PathVariable String cidade,
             @PageableDefault(size = 20, sort = {"data"}) Pageable page) {
-        var postsPet = petService.filtrarPosts(page, situacao, estado, cidade).map(DadosDetalhamentoPet::new);
+        var postsPet = petService.filtrarPostsEstadoCidade(page, situacao, estado, cidade).map(DadosDetalhamentoPet::new);
         return ResponseEntity.ok(postsPet);
+    }
+
+    @GetMapping("/{situacao}/{estado}")
+    public ResponseEntity<Page<DadosDetalhamentoPet>> obterPostPetsPorSituacaoEstado(
+            @PathVariable Situacao situacao,
+            @PathVariable Estados estado,
+            @PageableDefault(size = 20, sort = {"data"}) Pageable page) {
+        var postsPet = petService.filtrarPostsEstado(page, situacao, estado).map(DadosDetalhamentoPet::new);
+        return ResponseEntity.ok(postsPet);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deletarPost(
+            @PathVariable Long id,
+            @RequestHeader("Authorization") String bearerToken) throws AccessDeniedException {
+        var solicitante = dadosTokenService.identificarPerfil(bearerToken);
+        petService.desativarPost(id, solicitante);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -5,12 +5,14 @@ import com.alissonmds.LostPets.domain.models.endereco.Estados;
 import com.alissonmds.LostPets.domain.models.perfil.Perfil;
 import com.alissonmds.LostPets.domain.models.pet.Pet;
 import com.alissonmds.LostPets.domain.models.pet.Situacao;
-import com.alissonmds.LostPets.infra.exceptions.ValidacaoException;
 import com.alissonmds.LostPets.repository.PetRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.nio.file.AccessDeniedException;
 
 @Service
 public class PetService {
@@ -32,12 +34,29 @@ public class PetService {
         return post;
     }
 
-    public Page<Pet> filtrarPosts(Pageable pagina, Situacao situacao, Estados estado, String cidade) {
+    public Page<Pet> filtrarPostsEstadoCidade(Pageable pagina, Situacao situacao, Estados estado, String cidade) {
         try {
             return petRepository.findBySituacaoECidade(pagina, situacao.toString(), estado.getNomeEstado(), cidade);
 
         } catch (Exception e) {
-            throw new ValidacaoException("Nenhum anúncio encontrado.");
+            throw new EntityNotFoundException("Nenhum anúncio encontrado.");
         }
+    }
+
+    public Page<Pet> filtrarPostsEstado(Pageable pagina, Situacao situacao, Estados estado) {
+        try {
+            return petRepository.findBySituacaoEstado(pagina, situacao.toString(), estado.getNomeEstado());
+
+        } catch (Exception e) {
+            throw new EntityNotFoundException("Nenhum anúncio encontrado." + e.getMessage());
+        }
+    }
+
+    public void desativarPost(Long id, Perfil solicitante) throws AccessDeniedException {
+        var post = petRepository.getReferenceById(id);
+        if (post.getPerfil().equals(solicitante)) {
+            post.desativar();
+        }
+        throw new AccessDeniedException("Você não tem permissões para desativar esse post.");
     }
 }

@@ -3,6 +3,7 @@ package com.alissonmds.LostPets.domain.services;
 import com.alissonmds.LostPets.domain.dto.endereco.DadosAtualizacaoEndereco;
 import com.alissonmds.LostPets.domain.dto.perfil.DadosCadastramentoPerfil;
 import com.alissonmds.LostPets.domain.dto.perfil.DadosDetalhamentoPerfil;
+import com.alissonmds.LostPets.domain.dto.perfil.DadosDetalhamentoPerfilEndereco;
 import com.alissonmds.LostPets.domain.models.endereco.Estados;
 import com.alissonmds.LostPets.domain.models.perfil.Perfil;
 import com.alissonmds.LostPets.infra.exceptions.ValidacaoException;
@@ -20,7 +21,6 @@ public class PerfilService {
 
     @Autowired
     public PerfilService(PerfilRepository perfilRepository, ExtracaoDadosTokenService dadosTokenService) {
-
         this.perfilRepository = perfilRepository;
         this.dadosTokenService = dadosTokenService;
     }
@@ -39,8 +39,8 @@ public class PerfilService {
         return perfil;
     }
 
-    public DadosDetalhamentoPerfil buscarPerfil(Long id) {
-        return new DadosDetalhamentoPerfil(perfilRepository.findById(id)
+    public DadosDetalhamentoPerfilEndereco buscarPerfil(Long id) {
+        return new DadosDetalhamentoPerfilEndereco(perfilRepository.findById(id)
                 .orElseThrow(() -> new ValidacaoException("Perfil não encontrado")));
     }
 

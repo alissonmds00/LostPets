@@ -15,10 +15,6 @@ public class EnderecoService {
         this.municipioRepository = municipioRepository;
     }
 
-    public boolean validarEstado(String estado) {
-        return estadoRepository.existsByNome(estado);
-    }
-
     public boolean validarMunicipio(String estado, String cidade) {
         return municipioRepository.existsByNome(estado, cidade);
     }
