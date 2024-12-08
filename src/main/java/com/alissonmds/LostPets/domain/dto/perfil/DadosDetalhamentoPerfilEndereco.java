@@ -1,6 +1,5 @@
 package com.alissonmds.LostPets.domain.dto.perfil;
 
-import com.alissonmds.LostPets.domain.models.endereco.Endereco;
 import com.alissonmds.LostPets.domain.models.perfil.Perfil;
 
 public record DadosDetalhamentoPerfilEndereco(

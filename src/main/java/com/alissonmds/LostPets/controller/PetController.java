@@ -57,7 +57,7 @@ public class PetController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity deletarPost(
+    public ResponseEntity<Void> deletarPost(
             @PathVariable Long id,
             @RequestHeader("Authorization") String bearerToken) throws AccessDeniedException {
         var solicitante = dadosTokenService.identificarPerfil(bearerToken);
