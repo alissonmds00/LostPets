@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authorization.AuthorizationDeniedException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,19 +35,19 @@ public class TratamentoDeErros {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
-    @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<String> tratarErroBadCredentials() {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
+    @ExceptionHandler({BadCredentialsException.class, UsernameNotFoundException.class})
+    public ResponseEntity<String> tratarErroBadCredentials(Exception e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(!e.getMessage().isEmpty() ? e.getMessage() : "Credenciais inválidas");
     }
 
     @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<String> tratarErroAuthentication() {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Falha na autenticação");
+    public ResponseEntity<String> tratarErroAuthentication(Exception e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(!e.getMessage().isEmpty() ? e.getMessage() : "Falha na autenticação");
     }
 
     @ExceptionHandler({AccessDeniedException.class, AuthorizationDeniedException.class})
-    public ResponseEntity<String> tratarErroAcessoNegado() {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Você não tem permissão para isso.");
+    public ResponseEntity<String> tratarErroAcessoNegado(Exception e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(!e.getMessage().isEmpty() ? e.getMessage() : "Você não tem permissão para isso.");
     }
 
     @ExceptionHandler(Exception.class)

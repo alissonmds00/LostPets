@@ -6,6 +6,7 @@ import com.alissonmds.LostPets.domain.dto.perfil.DadosDetalhamentoPerfilEndereco
 import com.alissonmds.LostPets.domain.models.perfil.Perfil;
 import com.alissonmds.LostPets.infra.exceptions.ValidacaoException;
 import com.alissonmds.LostPets.repository.PerfilRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +50,14 @@ public class PerfilService {
                 throw new ValidacaoException("Ocorreu um erro ao tentar atualizar o endereço deste perfil");
             }
             return perfil;
+    }
+
+    public void bloquearPerfil(Long id) {
+        var perfil = perfilRepository.getReferenceByIdAtivo(id);
+        try {
+            perfil.getUsuario().bloquearUsuario();
+        } catch (EntityNotFoundException e) {
+            throw new EntityNotFoundException("Não foi encontrado. O usuário é inválido ou está bloqueado");
+        }
     }
 }

@@ -10,6 +10,7 @@ import com.alissonmds.LostPets.domain.services.PerfilService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,5 +45,13 @@ public class PerfilController {
     public ResponseEntity<DadosDetalhamentoPerfilEndereco> atualizarEndereco(@RequestBody DadosAtualizacaoEndereco dados, @RequestHeader("Authorization") String bearerToken) {
         var perfil = perfilService.atualizarEndereco(dados, bearerToken);
         return ResponseEntity.ok(new DadosDetalhamentoPerfilEndereco(perfil));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<Void> bloquearPerfil(@PathVariable Long id) {
+        perfilService.bloquearPerfil(id);
+        return ResponseEntity.noContent().build();
     }
 }

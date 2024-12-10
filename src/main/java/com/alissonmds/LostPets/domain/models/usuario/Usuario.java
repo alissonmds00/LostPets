@@ -72,4 +72,8 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
     }
+
+    public void bloquearUsuario() {
+        this.ativo = false;
+    }
 }
