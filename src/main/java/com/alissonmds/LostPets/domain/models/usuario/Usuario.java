@@ -1,6 +1,7 @@
 package com.alissonmds.LostPets.domain.models.usuario;
 
 import com.alissonmds.LostPets.domain.dto.usuario.DadosCadastramentoUsuario;
+import com.alissonmds.LostPets.domain.models.cargo.Cargo;
 import com.alissonmds.LostPets.domain.models.perfil.Perfil;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,6 +26,7 @@ public class Usuario implements UserDetails {
     private String login;
     private String senha;
     private boolean ativo;
+    private Cargo cargo;
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.REMOVE)
     private Perfil perfil;
 
@@ -32,12 +34,13 @@ public class Usuario implements UserDetails {
         this.login = dados.login();
         this.senha = senha;
         this.ativo = true;
+        this.cargo = Cargo.ROLE_USUARIO;
         this.perfil = null;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority(this.cargo.name()));
     }
 
     @Override

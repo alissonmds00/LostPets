@@ -10,9 +10,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
-
-import java.nio.file.AccessDeniedException;
 
 @Service
 public class PetService {
@@ -52,11 +51,18 @@ public class PetService {
         }
     }
 
-    public void desativarPost(Long id, Perfil solicitante) throws AccessDeniedException {
-        var post = petRepository.getReferenceById(id);
-        if (post.getPerfil().equals(solicitante)) {
+    public Pet getPetById(Long id) {
+        return petRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Pet não encontrado"));
+    }
+
+    public void desativarPost(Long id)  {
+        Pet post;
+        try {
+            post = petRepository.getByIdAtivo(id);
             post.desativar();
+            petRepository.save(post);
+        } catch (NullPointerException e) {
+            throw new EntityNotFoundException("Nenhum post encontrado, ou já inativo.");
         }
-        throw new AccessDeniedException("Você não tem permissões para desativar esse post.");
     }
 }

@@ -1,4 +1,4 @@
-package com.alissonmds.LostPets.config;
+package com.alissonmds.LostPets.infra.configurations;
 
 import com.alissonmds.LostPets.domain.models.endereco.Estados;
 import org.springframework.core.convert.converter.Converter;

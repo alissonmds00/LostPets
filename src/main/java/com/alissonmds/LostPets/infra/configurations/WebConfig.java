@@ -1,4 +1,4 @@
-package com.alissonmds.LostPets.config;
+package com.alissonmds.LostPets.infra.configurations;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
