@@ -7,6 +7,7 @@ import com.alissonmds.LostPets.domain.dto.perfil.DadosDetalhamentoPerfil;
 import com.alissonmds.LostPets.domain.dto.perfil.DadosDetalhamentoPerfilEndereco;
 import com.alissonmds.LostPets.domain.services.ExtracaoDadosTokenService;
 import com.alissonmds.LostPets.domain.services.PerfilService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/perfil")
+@SecurityRequirement(name = "bearer-key")
 public class PerfilController {
 
     private final PerfilService perfilService;

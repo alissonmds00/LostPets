@@ -6,6 +6,7 @@ import com.alissonmds.LostPets.domain.models.endereco.Estados;
 import com.alissonmds.LostPets.domain.models.pet.Situacao;
 import com.alissonmds.LostPets.domain.services.ExtracaoDadosTokenService;
 import com.alissonmds.LostPets.domain.services.PetService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/pets")
+@SecurityRequirement(name = "bearer-key")
 public class PetController {
 
     private final PetService petService;

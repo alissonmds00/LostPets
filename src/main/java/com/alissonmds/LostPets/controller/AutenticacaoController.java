@@ -3,6 +3,7 @@ import com.alissonmds.LostPets.domain.dto.usuario.DadosAutenticacao;
 import com.alissonmds.LostPets.domain.models.usuario.Usuario;
 import com.alissonmds.LostPets.infra.security.DadosTokenJWT;
 import com.alissonmds.LostPets.infra.security.TokenService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/login")
+@SecurityRequirement(name = "bearer-key")
 public class AutenticacaoController {
 
     private final AuthenticationManager manager;
