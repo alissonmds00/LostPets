@@ -76,4 +76,8 @@ public class Usuario implements UserDetails {
     public void bloquearUsuario() {
         this.ativo = false;
     }
+
+    public void alterarSenha(String senha) {
+        this.senha = senha;
+    }
 }

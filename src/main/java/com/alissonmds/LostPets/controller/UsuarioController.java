@@ -1,5 +1,6 @@
 package com.alissonmds.LostPets.controller;
 
+import com.alissonmds.LostPets.domain.dto.usuario.DadosAlteracaoSenha;
 import com.alissonmds.LostPets.domain.dto.usuario.DadosCadastramentoUsuario;
 import com.alissonmds.LostPets.domain.services.UsuarioService;
 import com.alissonmds.LostPets.repository.UsuarioRepository;
@@ -17,8 +18,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/registro")
-@SecurityRequirement(name = "bearer-key")
-
 public class UsuarioController {
 
     private final UsuarioRepository usuarioRepository;
