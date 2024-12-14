@@ -1,8 +1,8 @@
 create table Estado(
     id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
-    codigoUf INT NOT NULL,
-    nome VARCHAR(50) NOT NULL,
-    uf CHAR(2) NOT NULL,
+    codigoUf INTEGER NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    uf VARCHAR(255) NOT NULL,
     regiao SMALLINT NOT NULL,
     PRIMARY KEY (id)
 );

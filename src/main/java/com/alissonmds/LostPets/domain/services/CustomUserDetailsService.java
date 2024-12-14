@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepository.findByLogin(username)
+        Usuario usuario = usuarioRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado."));
         if (!usuario.isAtivo()) {
             throw new AccessDeniedException("Usuário não encontrado ou bloqueado.");

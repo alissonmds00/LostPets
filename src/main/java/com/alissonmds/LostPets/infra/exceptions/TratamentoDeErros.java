@@ -1,5 +1,6 @@
 package com.alissonmds.LostPets.infra.exceptions;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,7 @@ public class TratamentoDeErros {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(!e.getMessage().isEmpty() ? e.getMessage() : "Credenciais inválidas");
     }
 
-    @ExceptionHandler(AuthenticationException.class)
+    @ExceptionHandler({AuthenticationException.class, TokenExpiredException.class})
     public ResponseEntity<String> tratarErroAuthentication(Exception e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(!e.getMessage().isEmpty() ? e.getMessage() : "Falha na autenticação");
     }

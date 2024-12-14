@@ -28,7 +28,7 @@ public class ExtracaoDadosTokenService {
     public Usuario identificarUsuario(String bearerToken) {
        var token = this.extrairToken(bearerToken);
        var loginUsuario = tokenService.getSubject(token);
-       return usuarioRepository.findByLogin(loginUsuario)
+       return usuarioRepository.findByEmail(loginUsuario)
                .orElseThrow(() -> new ValidacaoException("Usuário não encontrado."));
     }
 

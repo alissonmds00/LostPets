@@ -1,8 +1,8 @@
 create table Municipio(
                       id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
                        codigo INTEGER NOT NULL,
-                       nome VARCHAR(50) NOT NULL,
-                       uf CHAR(2) NOT NULL,
+                       nome VARCHAR(255) NOT NULL,
+                       uf VARCHAR(255) NOT NULL,
                        PRIMARY KEY (id)
 );
 -- Insert Data --

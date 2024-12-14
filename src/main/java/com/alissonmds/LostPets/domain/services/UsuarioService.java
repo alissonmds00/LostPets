@@ -28,7 +28,7 @@ public class UsuarioService {
 
     public Usuario criarUsuario(DadosCadastramentoUsuario dados) throws Exception {
         try {
-            var busca = repository.findByLogin(dados.login());
+            var busca = repository.findByEmail(dados.email());
             if (busca.isPresent()) {
                 throw new ValidacaoException("Usuário já cadastrado");
             }
@@ -40,7 +40,7 @@ public class UsuarioService {
     }
 
     public void alterarSenha(DadosAlteracaoSenha dados) {
-            var usuario = repository.findByLogin(dados.login()).orElseThrow(() -> new ValidacaoException("Usuário não encontrado"));
+            var usuario = repository.findByEmail(dados.email()).orElseThrow(() -> new ValidacaoException("Usuário não encontrado"));
             var senhaAntiga = usuario.getSenha();
             if (passwordEncoder.matches(dados.senhaAntiga(), senhaAntiga)) {
                 validacoesAlteracaoDeSenhas.forEach(v -> v.validar(dados));

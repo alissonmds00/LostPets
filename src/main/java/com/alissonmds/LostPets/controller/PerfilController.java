@@ -31,7 +31,7 @@ public class PerfilController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<DadosDetalhamentoPerfil> criarUsuario(@Valid @RequestBody DadosCadastramentoPerfil dados, @RequestHeader("Authorization") String bearerToken) {
+    public ResponseEntity<DadosDetalhamentoPerfil> criarPerfil(@Valid @RequestBody DadosCadastramentoPerfil dados, @RequestHeader("Authorization") String bearerToken) {
         var token = dadosTokenService.extrairToken(bearerToken);
         var novoPerfil = perfilService.criarPerfil(dados, token);
         return ResponseEntity.ok().body(new DadosDetalhamentoPerfil(novoPerfil));

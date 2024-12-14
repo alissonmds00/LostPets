@@ -23,7 +23,7 @@ public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String login;
+    private String email;
     private String senha;
     private boolean ativo;
     private Cargo cargo;
@@ -31,7 +31,7 @@ public class Usuario implements UserDetails {
     private Perfil perfil;
 
     public Usuario(DadosCadastramentoUsuario dados, String senha) {
-        this.login = dados.login();
+        this.email = dados.email();
         this.senha = senha;
         this.ativo = true;
         this.cargo = Cargo.ROLE_USUARIO;
@@ -50,7 +50,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public String getUsername() {
-        return login;
+        return email;
     }
 
     @Override
