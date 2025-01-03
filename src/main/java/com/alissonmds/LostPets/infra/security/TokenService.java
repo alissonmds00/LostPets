@@ -49,7 +49,24 @@ public class TokenService {
         }
     }
 
+    public String gerarTokenRecuperacaoSenha(Usuario usuario) {
+        try {
+            var algoritmo = Algorithm.HMAC256(SECRET);
+            return JWT.create()
+                    .withIssuer(ISSUER)
+                    .withSubject(usuario.getEmail())
+                    .withExpiresAt(dataExpiracaoRecuperacaoSenha())
+                    .sign(algoritmo);
+        } catch (JWTCreationException e) {
+            throw new RuntimeException("Erro na geração de token de redefinição de senha", e);
+        }
+    }
+
     private Instant dataExpiracao() {
         return LocalDateTime.now().plusHours(1).toInstant(ZoneOffset.of("-03:00"));
+    }
+
+    private Instant dataExpiracaoRecuperacaoSenha() {
+        return LocalDateTime.now().plusHours(4).toInstant(ZoneOffset.of("-03:00"));
     }
 }

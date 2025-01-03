@@ -2,6 +2,8 @@ package com.alissonmds.LostPets.controller;
 
 import com.alissonmds.LostPets.domain.dto.usuario.DadosAlteracaoSenha;
 import com.alissonmds.LostPets.domain.dto.usuario.DadosAutenticacao;
+import com.alissonmds.LostPets.domain.dto.usuario.DadosRecuperacaoSenha;
+import com.alissonmds.LostPets.domain.dto.usuario.DadosRedefinicaoSenha;
 import com.alissonmds.LostPets.domain.models.usuario.Usuario;
 import com.alissonmds.LostPets.domain.services.UsuarioService;
 import com.alissonmds.LostPets.infra.security.DadosTokenJWT;
@@ -40,10 +42,23 @@ public class AutenticacaoController {
         return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
     }
 
-    @PostMapping("/alterar")
+    @PostMapping("/alterar-senha")
     @Transactional
     public ResponseEntity<Void> alterarSenha(@RequestBody @Valid DadosAlteracaoSenha dados) {
         usuarioService.alterarSenha(dados);
+        return ResponseEntity.ok().build();
+    }
+
+    //para utilizar, necessita de um serviço de email que permita login de fontes pouco confiáveis
+    @PostMapping("/recuperar-senha")
+    public ResponseEntity<Void> solicitarRecuperacaoSenha(@RequestBody @Valid DadosRecuperacaoSenha dados) {
+        usuarioService.solicitarRecuperacaoSenha(dados);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/redefinir-senha")
+    public ResponseEntity<Void> redefinirSenha(@RequestBody @Valid DadosRedefinicaoSenha dados) {
+        usuarioService.redefinirSenha(dados);
         return ResponseEntity.ok().build();
     }
 }
